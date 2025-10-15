@@ -1,6 +1,5 @@
 from pyspark import pipelines as dp
 from pyspark.sql.functions import col
-from utilities import utils
 
 
 # This file defines a sample transformation.
@@ -9,8 +8,5 @@ from utilities import utils
 
 
 @dp.table
-def sample_trips_python_taxi_trip():
-    return (
-        spark.read.table("samples.nyctaxi.trips")
-        .withColumn("trip_distance_km", utils.distance_km(col("trip_distance")))
-    )
+def sample_trips_nyc_taxi_trip_bundle():
+    return spark.read.table("samples.nyctaxi.trips")

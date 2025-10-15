@@ -1,0 +1,14 @@
+# The main pipeline for nyc_taxi_trip_bundle
+
+resources:
+  pipelines:
+    nyc_taxi_trip_bundle_etl:
+      name: nyc_taxi_trip_bundle_etl
+      catalog: ${var.catalog}
+      schema: ${var.schema}
+      serverless: true
+      root_path: "."
+
+      libraries:
+        - glob:
+            include: transformations/**

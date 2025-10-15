@@ -1,0 +1,21 @@
+# The job that triggers nyc_taxi_trip_bundle_etl.
+
+resources:
+  jobs:
+    nyc_taxi_trip_bundle_job:
+      name: nyc_taxi_trip_bundle_job
+
+      trigger:
+        # Run this job every day, exactly one day from the last run; see https://docs.databricks.com/api/workspace/jobs/create#trigger
+        periodic:
+          interval: 1
+          unit: DAYS
+
+      #email_notifications:
+      #  on_failure:
+      #    - your_email@example.com
+
+      tasks:
+        - task_key: refresh_pipeline
+          pipeline_task:
+            pipeline_id: ${resources.pipelines.nyc_taxi_trip_bundle_etl.id}
